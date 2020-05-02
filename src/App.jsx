@@ -4,6 +4,7 @@ import InputFields from "./components/InputFields";
 import LoginForm from "./components/LoginForm";
 import { authenticate } from "./modules/auth";
 import DisplayPerformanceData from "./components/DisplayPerformanceData";
+import { Segment, Button, Menu } from "semantic-ui-react";
 
 class App extends Component {
   state = {
@@ -45,15 +46,17 @@ class App extends Component {
         break;
       case !renderLoginForm && !authenticated:
         renderLogin = (
-          <>
-            <button
+          <Menu>
+            <Menu.Item
+              header
+              name="Login"
               id="login"
               onClick={() => this.setState({ renderLoginForm: true })}
             >
               Login
-            </button>
+            </Menu.Item>
             <p id="message">{message}</p>
-          </>
+          </Menu>
         );
         break;
       case authenticated:
@@ -71,12 +74,14 @@ class App extends Component {
           );
         } else {
           performanceDataIndex = (
-            <button
+            <Button
+              basic
+              color="black"
               id="show-index"
               onClick={() => this.setState({ renderIndex: true })}
             >
               Show past entries
-            </button>
+            </Button>
           );
         }
         renderLogin = (
@@ -91,19 +96,21 @@ class App extends Component {
     }
     return (
       <>
-        <InputFields onChangeHandler={this.onChangeHandler} />
         {renderLogin}
-        <DisplayCooperResult
-          distance={this.state.distance}
-          gender={this.state.gender}
-          age={this.state.age}
-          authenticated={this.state.authenticated}
-          entrySaved={this.state.entrySaved}
-          entryHandler={() =>
-            this.setState({ entrySaved: true, updateIndex: true })
-          }
-        />
-        {performanceDataIndex}
+        <Segment placeholder padded="very" textAlign="center">
+          <InputFields onChangeHandler={this.onChangeHandler} />
+          <DisplayCooperResult
+            distance={this.state.distance}
+            gender={this.state.gender}
+            age={this.state.age}
+            authenticated={this.state.authenticated}
+            entrySaved={this.state.entrySaved}
+            entryHandler={() =>
+              this.setState({ entrySaved: true, updateIndex: true })
+            }
+          />
+          {performanceDataIndex}
+        </Segment>
       </>
     );
   }
