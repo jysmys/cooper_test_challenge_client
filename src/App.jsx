@@ -19,8 +19,8 @@ class App extends Component {
     updateIndex: false,
   };
 
-  onChangeHandler = (e) => {
-    this.setState({ [e.target.name]: e.target.value, entrySaved: false });
+  onChangeHandler = (e, data) => {
+    this.setState({ [data.name]: data.value, entrySaved: false });
   };
 
   onLogin = async (e) => {

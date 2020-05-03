@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { getData } from "../modules/performanceData";
 import { Doughnut } from "react-chartjs-2";
-
+//https://www.educative.io/edpresso/how-to-use-chartjs-to-create-charts-in-react
 class DisplayPerformanceData extends Component {
   state = {
     performanceData: null,
@@ -38,7 +38,9 @@ class DisplayPerformanceData extends Component {
         case "Excellent":
           data.push(5);
           break;
+        default:
       }
+      return data;
     });
     this.setState({ data: data });
   }
